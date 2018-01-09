@@ -44,6 +44,7 @@ const serveGuestPage = function(req,res){
 }
 
 const serveFile = function (req, res) {
+  if(req.url=="/") req.url = "/index.html";
   let fileName = 'public' + req.url;
   if (req.method == 'GET' && isFile(fileName)) {
     res.setHeader("Content-Type",getContentType(fileName));
@@ -96,12 +97,15 @@ const getContentType = function(file) {
   return extenstions[extn];
 };
 
-const addComments = function(file1Path,file2Path,commentData) {
+const addComments = function(req,res) {
+  let filePath = "data/comments.json";
+  let commentData = req.body;
   commentData.time = new Date().toLocaleString();
   comments.unshift(commentData);
   let stringifiedComments = JSON.stringify(comments, null, 2);
-  fs.writeFile(file1Path, stringifiedComments, "utf8", (err) => console.log(err));
-  fs.writeFile(file2Path, "let comments = " + stringifiedComments, "utf8", (err) => console.log(err))
+  fs.writeFileSync(filePath, stringifiedComments, "utf8");
+  res.redirect("/guest-page.html");
+  res.end();
 }
 
 let app = WebApp.create();
@@ -110,6 +114,7 @@ app.use(loadUser);
 app.use(serveFile);
 app.get("/data",sendData);
 app.get("/guest-page.html",serveGuestPage);
+app.post("/submitComment",addComments);
 app.get('/login',(req,res)=>{
   res.setHeader('Content-type','text/html');
   if(req.cookies.logInFailed) res.write('<p>logIn Failed</p>');
@@ -129,7 +134,6 @@ app.post('/login',(req,res)=>{
   let sessionid = new Date().getTime();
   res.setHeader('Set-Cookie',`sessionid=${sessionid}`);
   user.sessionid = sessionid;
-  addComments("./data/comments.json","./public/js/data.js",req.body);
   res.redirect('/guest-page.html');
 });
 
