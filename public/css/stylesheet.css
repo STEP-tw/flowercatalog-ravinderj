@@ -1,0 +1,37 @@
+body {
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 1150px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h3 {
+  color: orange;
+  text-align: center;
+}
+
+.quick-links {
+  float: right;
+  padding-top: 290px;
+  padding-right: 100px;
+}
+
+#animated-image {
+  padding-left: 60px;
+}
+
+#agerantum {
+  width:600px;
+}
+
+#abeliophyllum {
+  width: 500px;
+}
+
+.text {
+  float: right;
+  padding-top: 290px;
+}

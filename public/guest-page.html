@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="comments.json" charset="utf-8"></script>
+  <script src="data.js" charset="utf-8"></script>
+  <script src="renderData.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="stylesheet.css">
+  <title>guest book</title>
+</head>
+
+<body>
+  <div class="body">
+    <h1 style="color:orange"><a href="index.html"><<</a>Guest Book</h1>
+    <h2>Leave a comment</h2>
+    <form class="" action="submitName" method="post">
+      Name: <input type="text" name="name" placeholder="Name"><br>
+      Comment: <textarea type="text" name="comment" placeholder="Comment" style="height:45px; width:155px;"></textarea><br>
+      <input type="submit" value="submit" style="background:#80808063">
+      <hr>
+    </form>
+      <h4>DATE_NAMES_COMMENTS_LIST</h4>
+      <div id="comments">
+      </div>
+  </div>
+</body>
+
+</html>
