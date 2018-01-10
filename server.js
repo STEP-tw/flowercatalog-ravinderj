@@ -100,10 +100,12 @@ const getContentType = function(file) {
 const addComments = function(req,res) {
   let filePath = "data/comments.json";
   let commentData = req.body;
-  commentData.time = new Date().toLocaleString();
-  comments.unshift(commentData);
-  let stringifiedComments = JSON.stringify(comments, null, 2);
-  fs.writeFileSync(filePath, stringifiedComments, "utf8");
+  if(commentData.name && commentData.comment){
+    commentData.time = new Date().toLocaleString();
+    comments.unshift(commentData);
+    let stringifiedComments = JSON.stringify(comments, null, 2);
+    fs.writeFileSync(filePath, stringifiedComments, "utf8");
+  }
   res.redirect("/guest-page.html");
   res.end();
 }
